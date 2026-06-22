@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>竞彩网 - 体育赛事数据导航</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f5f7fb;
+            color: #1f2a3e;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ---- 顶部导航 ---- */
+        .navbar {
+            background-color: #0d1b2a;
+            padding: 18px 0;
+            border-bottom: 1px solid #1e3a5f;
+        }
+
+        .navbar .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #e0e9f5;
+            letter-spacing: 0.5px;
+        }
+
+        .logo span {
+            color: #f0b541;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #b8c9e0;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #f0b541;
+        }
+
+        /* ---- Hero ---- */
+        .hero {
+            background: linear-gradient(145deg, #0d1b2a 0%, #1b2f47 100%);
+            color: #eef3fa;
+            padding: 70px 0 80px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.6rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 i {
+            color: #f0b541;
+            font-style: normal;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 680px;
+            margin: 0 auto 26px;
+            color: #cbdae9;
+        }
+
+        .hero .tagline {
+            display: inline-block;
+            background: rgba(240, 181, 65, 0.18);
+            border: 1px solid rgba(240, 181, 65, 0.35);
+            border-radius: 40px;
+            padding: 10px 28px;
+            font-size: 0.95rem;
+            color: #eed9a8;
+        }
+
+        /* ---- 核心介绍 ---- */
+        .intro {
+            padding: 60px 0 40px;
+        }
+
+        .intro-flex {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 48px;
+            align-items: center;
+        }
+
+        .intro-text {
+            flex: 1 1 360px;
+        }
+
+        .intro-text h2 {
+            font-size: 2rem;
+            font-weight: 500;
+            margin-bottom: 24px;
+            color: #0d1b2a;
+        }
+
+        .intro-text h2 small {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #5e6f88;
+            display: block;
+            margin-top: 6px;
+        }
+
+        .intro-text p {
+            margin-bottom: 20px;
+            color: #2c3e5a;
+        }
+
+        .intro-text a {
+            color: #c97b2e;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dashed #c97b2e;
+            transition: border 0.2s;
+        }
+
+        .intro-text a:hover {
+            border-bottom: 2px solid #a8641f;
+        }
+
+        .intro-highlight {
+            flex: 0 0 280px;
+            background: #e6edf6;
+            border-radius: 18px;
+            padding: 32px 24px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+        }
+
+        .intro-highlight ul {
+            list-style: none;
+        }
+
+        .intro-highlight li {
+            padding: 10px 0;
+            border-bottom: 1px solid #d0dbea;
+            font-size: 0.95rem;
+            color: #1f334b;
+        }
+
+        .intro-highlight li:last-child {
+            border-bottom: none;
+        }
+
+        .intro-highlight li::before {
+            content: "⚡";
+            margin-right: 10px;
+            color: #e09a3a;
+        }
+
+        /* ---- 三个场景模块 ---- */
+        .scenes {
+            padding: 20px 0 60px;
+        }
+
+        .scenes h3 {
+            font-size: 1.8rem;
+            font-weight: 500;
+            text-align: center;
+            margin-bottom: 48px;
+            color: #0d1b2a;
+        }
+
+        .scene-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 28px;
+        }
+
+        .scene-card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 32px 24px 28px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+            transition: transform 0.2s ease, box-shadow 0.2s;
+            border: 1px solid #e9eef4;
+        }
+
+        .scene-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.06);
+        }
+
+        .scene-card .icon {
+            font-size: 2.2rem;
+            margin-bottom: 14px;
+        }
+
+        .scene-card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+            color: #13273e;
+        }
+
+        .scene-card p {
+            font-size: 0.95rem;
+            color: #3d506b;
+            margin-bottom: 16px;
+        }
+
+        .scene-card .scene-link {
+            display: inline-block;
+            color: #c97b2e;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s;
+        }
+
+        .scene-card .scene-link:hover {
+            border-bottom-color: #c97b2e;
+        }
+
+        /* ---- 常见说明 ---- */
+        .faq-section {
+            background: #ffffff;
+            border-top: 1px solid #dfe7f0;
+            padding: 50px 0 60px;
+        }
+
+        .faq-section h3 {
+            font-size: 1.7rem;
+            font-weight: 500;
+            margin-bottom: 36px;
+            color: #0d1b2a;
+            text-align: center;
+        }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px 40px;
+        }
+
+        .faq-item {
+            padding: 16px 0 8px;
+            border-bottom: 1px solid #eef3f8;
+        }
+
+        .faq-item strong {
+            display: block;
+            font-size: 1.05rem;
+            color: #1d334c;
+            margin-bottom: 6px;
+        }
+
+        .faq-item p {
+            font-size: 0.9rem;
+            color: #4f637e;
+        }
+
+        .faq-item a {
+            color: #c97b2e;
+            text-decoration: none;
+            border-bottom: 1px dotted #c97b2e;
+        }
+
+        .faq-item a:hover {
+            border-bottom-style: solid;
+        }
+
+        /* ---- 页脚 ---- */
+        .footer {
+            background: #0d1b2a;
+            color: #99aec6;
+            padding: 28px 0;
+            font-size: 0.85rem;
+            text-align: center;
+        }
+
+        .footer a {
+            color: #e0b87a;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* ---- 响应式 ---- */
+        @media (max-width: 700px) {
+            .hero h1 {
+                font-size: 1.9rem;
+            }
+
+            .nav-links {
+                gap: 18px;
+                margin-top: 12px;
+                flex-wrap: wrap;
+            }
+
+            .navbar .container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .intro-flex {
+                flex-direction: column;
+            }
+
+            .intro-highlight {
+                flex: 1 1 auto;
+                width: 100%;
+            }
+
+            .scene-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 50px 0 60px;
+            }
+
+            .hero h1 {
+                font-size: 1.6rem;
+            }
+
+            .container {
+                padding: 0 16px;
+            }
+
+            .intro-text h2 {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 顶部导航 -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">⚽ <span>数据</span>导航</div>
+            <ul class="nav-links">
+                <li><a href="#">首页</a></li>
+                <li><a href="#">赛事</a></li>
+                <li><a href="#">数据</a></li>
+                <li><a href="#">帮助</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero 区域 -->
+    <section class="hero">
+        <div class="container">
+            <h1>看懂赛事数据，从 <i>竞彩网</i> 开始</h1>
+            <p>聚合主流足球与篮球联赛的赛程、积分、统计与历史交锋，帮你快速找到需要的信息，不必在多个页面之间反复切换。</p>
+            <span class="tagline">📊 覆盖 20+ 联赛 · 实时更新 · 简洁直观</span>
+        </div>
+    </section>
+
+    <!-- 核心介绍 -->
+    <section class="intro">
+        <div class="container intro-flex">
+            <div class="intro-text">
+                <h2>
+                    一个专注赛事数据的中立平台
+                    <small>没有喧哗的预测，只有清晰的数据展示</small>
+                </h2>
+                <p>
+                    很多朋友在浏览体育数据时，往往被广告或复杂界面干扰。而 <a href="https://data-sporttery.com">竞彩网</a> 的定位很纯粹：
+                    它把比赛数据按联赛、时间、球队分类呈现，方便你一眼看到对阵、比分、排名和关键统计。
+                </p>
+                <p>
+                    无论你是想快速回顾昨晚的赛果，还是对比两支球队的近期状态，这个站点都能提供结构化的信息，减少多余跳转。
+                </p>
+            </div>
+            <div class="intro-highlight">
+                <ul>
+                    <li>赛程与结果同页展示</li>
+                    <li>球队积分榜实时更新</li>
+                    <li>历史交锋记录一键查看</li>
+                    <li>移动端适配良好</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- 三个场景模块 -->
+    <section class="scenes">
+        <div class="container">
+            <h3>你会在这些场景用到它</h3>
+            <div class="scene-grid">
+                <div class="scene-card">
+                    <div class="icon">📋</div>
+                    <h4>赛前快速浏览</h4>
+                    <p>周末比赛密集，想提前知道有哪些对阵、开赛时间以及主客队近况，打开 <a href="https://data-sporttery.com" class="scene-link">竞彩网</a> 即可一览无余。</p>
+                </div>
+                <div class="scene-card">
+                    <div class="icon">📈</div>
+                    <h4>赛后数据核对</h4>
+                    <p>比赛结束后想确认最终比分、进球时间、射门次数等细节，不用等待新闻汇总，数据页面会直接呈现。</p>
+                </div>
+                <div class="scene-card">
+                    <div class="icon">🔍</div>
+                    <h4>球队纵向对比</h4>
+                    <p>关注某支球队的赛季走势？查看它近五场成绩、主客场表现以及同对手的历史记录，所有数据都集中在一起。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 常见说明 FAQ 摘要 -->
+    <section class="faq-section">
+        <div class="container">
+            <h3>常见说明</h3>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <strong>数据来源可靠吗？</strong>
+                    <p>本站数据聚合自公开体育统计接口，并做交叉核对，力求准确。但比赛数据可能存在延迟，建议以官方最终结果为准。</p>
+                </div>
+                <div class="faq-item">
+                    <strong>是否涵盖所有联赛？</strong>
+                    <p>目前覆盖欧洲主流联赛（英超、西甲、意甲、德甲、法甲）以及中超、日职、韩职等亚洲联赛，后续会逐步扩充。</p>
+                </div>
+                <div class="faq-item">
+                    <strong>手机上看方便吗？</strong>
+                    <p>是的，页面针对手机屏幕做了适配，表格和卡片会自动调整宽度，在手机上也能顺畅浏览。</p>
+                </div>
+                <div class="faq-item">
+                    <strong>需要注册或付费吗？</strong>
+                    <p>完全免费，无需注册。直接打开 <a href="https://data-sporttery.com">竞彩网</a> 就能使用所有数据功能。</p>
+                </div>
+                <div class="faq-item">
+                    <strong>能查到历史赛季的数据吗？</strong>
+                    <p>当前主要展示当赛季及近两个赛季的数据，更早的历史数据正在逐步整理中。</p>
+                </div>
+                <div class="faq-item">
+                    <strong>有其他问题怎么办？</strong>
+                    <p>你可以在页面底部找到反馈入口，或直接通过网站内嵌的帮助文档了解详细说明。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 · 数据导航 &nbsp;|&nbsp; 内容仅供参考，请以官方发布为准 &nbsp;|&nbsp; <a href="https://data-sporttery.com">竞彩网</a></p>
+        </div>
+    </footer>
+
+</body>
+</html>
